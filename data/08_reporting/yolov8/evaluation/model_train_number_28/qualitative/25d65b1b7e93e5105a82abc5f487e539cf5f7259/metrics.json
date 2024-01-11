@@ -1,0 +1,39 @@
+{
+  "instances": {
+    "prediction": {
+      "soft_coral": 0,
+      "hard_coral": 14
+    },
+    "annotation": {
+      "soft_coral": 0,
+      "hard_coral": 12
+    }
+  },
+  "iou": {
+    "other": 0.9344434486467109,
+    "soft_coral": 0.0,
+    "hard_coral": 0.5312041911660176,
+    "mean": 0.4885492132709095
+  },
+  "dice": {
+    "other": 0.9661108979954153,
+    "soft_coral": 0.0,
+    "hard_coral": 0.6938384759272421,
+    "mean": 0.5533164579742191
+  },
+  "precision": {
+    "hard_coral": 0.5833608458590581,
+    "soft_coral": 0.0,
+    "other": 0.9867971294266494
+  },
+  "recall": {
+    "hard_coral": 0.855940127129302,
+    "soft_coral": 0.0,
+    "other": 0.9462744621457518
+  },
+  "f1": {
+    "hard_coral": 0.6937913283887952,
+    "soft_coral": 0.0,
+    "other": 0.9660610852817848
+  }
+}
