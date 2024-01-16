@@ -1,0 +1,2 @@
+[tool.pyright]
+include = ["src/data", "src/evaluate", "src/predict", "src/train"]
