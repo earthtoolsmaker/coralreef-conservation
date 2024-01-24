@@ -55,9 +55,11 @@ def write_config_yaml(
     path: Path,
     X_train,
     X_val,
+    X_test,
     dataset_names: list[str],
     seed: int,
     train_size_ratio: float,
+    val_test_size_ratio: float,
 ) -> None:
     """Writes the `config.yaml` file that describes the generated dataset."""
 
@@ -71,10 +73,13 @@ def write_config_yaml(
         "dataset_names": dataset_names,
         "seed": seed,
         "train_size_ratio": train_size_ratio,
+        "val_test_size_ratio": val_test_size_ratio,
         "train_dataset_size": len(X_train),
         "val_dataset_size": len(X_val),
+        "test_dataset_size": len(X_test),
         "train_dataset": entries_to_dict(X_train),
         "val_dataset": entries_to_dict(X_val),
+        "test_dataset": entries_to_dict(X_test),
     }
 
     with open(path / "config.yaml", "x") as f:
@@ -92,6 +97,7 @@ def write_data_yaml(path: Path) -> None:
     data = {
         "train": "./train/images",
         "val": "./val/images",
+        "test": "./test/images",
         "nc": 2,
         # hard and soft corals where incorrectly read using cv2 when builting
         # yolov8_pytorch_txt_format, we need to account for this
@@ -150,6 +156,8 @@ def init_yolov8_dataset_folder_structure(output_dir: Path, clear: bool = True) -
         output_dir / "train/labels/",
         output_dir / "val/images/",
         output_dir / "val/labels/",
+        output_dir / "test/images/",
+        output_dir / "test/labels/",
     ]
 
     for dir in dirs:
@@ -361,8 +369,13 @@ def write_entry(
     output_dir: Path,
     mode: str = "train",
 ) -> None:
-    """Given an `entry` and a mode in #{`train`, `val`}, it writes it in a
-    YOLOv8 format."""
+    """Given an `entry` and a mode in #{`train`, `val`, `test`}, it writes it
+    in a YOLOv8 format."""
+    assert mode in [
+        "train",
+        "val",
+        "test",
+    ], f"`mode` should be train|val|test - got {mode}"
     source_image_filepath = entry["image_filepath"]
     source_label_filepath = entry["label_filepath"]
     destination_image_filepath = (
@@ -392,6 +405,7 @@ def write_entry(
 def write_dataset(
     X_train: list[Entry],
     X_val: list[Entry],
+    X_test: list[Entry],
     output_dir: Path,
 ) -> None:
     """Writes the dataset splitted in X_train and X_val into the right folder
@@ -404,6 +418,10 @@ def write_dataset(
     for entry in X_val:
         write_entry(entry, output_dir=output_dir, mode="val")
 
+    logging.info(f"Generating test set - {len(X_test)} datapoints")
+    for entry in X_test:
+        write_entry(entry, output_dir=output_dir, mode="test")
+
 
 def generate(
     split_train_val: Callable,
@@ -414,6 +432,7 @@ def generate(
     output_dir: Path,
     seed: int = 42,
     train_size_ratio: float = 0.8,
+    val_test_size_ratio: float = 0.5,
 ) -> None:
     """Main function to generate the full dataset ready for YOLOv8 to be
     trained on."""
@@ -439,17 +458,33 @@ def generate(
         rs_labelled_root_dir=rs_labelled_root_dir,
         yolov8_pytorch_txt_format_root_dir=yolov8_pytorch_txt_format_root_dir,
     )
-    X_train, X_val = split_train_val(X, train_size_ratio=train_size_ratio, seed=seed)
+    X_train, X_val_and_test = split_train_val(
+        X,
+        train_size_ratio=train_size_ratio,
+        seed=seed,
+    )
+    X_val, X_test = split_train_val(
+        X_val_and_test,
+        train_size_ratio=val_test_size_ratio,
+        seed=seed,
+    )
     logging.info(f"Writing the data in {output_dir}")
-    write_dataset(X_train, X_val, output_dir=output_dir)
+    write_dataset(
+        X_train=X_train,
+        X_val=X_val,
+        X_test=X_test,
+        output_dir=output_dir,
+    )
     logging.info("Writing config.yaml file")
     write_config_yaml(
         path=output_dir,
         X_train=X_train,
         X_val=X_val,
+        X_test=X_test,
         dataset_names=dataset_names,
         seed=seed,
         train_size_ratio=train_size_ratio,
+        val_test_size_ratio=val_test_size_ratio,
     )
 
 

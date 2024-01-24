@@ -36,23 +36,31 @@ def make_cli_parser() -> argparse.ArgumentParser:
         "--save-path",
         help="path to save the predictions made by the model. Usually data/08_model_output/yolov8/.",
     )
+    parser.add_argument(
+        "-log",
+        "--loglevel",
+        default="warning",
+        help="Provide logging level. Example --loglevel debug, default=warning",
+    )
     return parser
 
 
 if __name__ == "__main__":
     cli_parser = make_cli_parser()
     args = vars(cli_parser.parse_args())
+    logging.basicConfig(level=args["loglevel"].upper())
     if not validate_parsed_args(args):
         exit(1)
     else:
         logging.info(f"Loading the model weights from {args['model_weights']}")
         model = predict.load_model(weights_path=args["model_weights"])
         logging.info(f"Running the inference on {args['source_path']}")
-        if args["save_path"]:
-            predict.predict(
-                model=model, source=args["source_path"], save_path=args["save_path"]
-            )
-        else:
-            predict.predict(model=model, source=args["source_path"])
-        logging.info("Done")
+        if model:
+            if args["save_path"]:
+                predict.predict(
+                    model=model, source=args["source_path"], save_path=args["save_path"]
+                )
+            else:
+                predict.predict(model=model, source=args["source_path"])
+            logging.info("Done")
         exit(0)
