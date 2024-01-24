@@ -3,15 +3,13 @@
 This folder contains data and work done during the Coral Reef #2
 challenge organized by Fruitpunchai.
 
-The project is organized following the [cookie-cutter-datascience guideline](https://drivendata.github.io/cookiecutter-data-science/#directory-structure).
+The project is organized following the [cookie-cutter-datascience
+guideline](https://drivendata.github.io/cookiecutter-data-science/#directory-structure).
 
 ## TODO
 
-- [ ] Clean up the evaluation script
 - [ ] add the label_mismatch logic in a script to be able to regenerate it at will
 - [ ] Try running the repo from scratch on the GPU instance
-- [ ] Improve the evaluation script speed - look into Pytorch metrics
-- [ ] parallelize the qualitative evaluation to make it run much faster
 - [ ] Finish the pyproject.toml
 
 ## Fast Track
@@ -246,17 +244,3 @@ here](https://docs.ultralytics.com/modes/predict/#inference-sources).
 - [Drive](https://drive.google.com/drive/folders/10nyCTXklFmpKC-y4ph3GAnUK-sDu9y6l)
 - [Notion](https://www.notion.so/fruitpunch/AI-for-Coral-Reefs-43061618a26a4ca6b610f00d7d0daac9)
 - [Slack](fruitpunchai.slack.com)
-
-## Resources
-
-### Automatic coral image analysis
-
-- [Squidle](https://squidle.org/): developed by Greybits Engineering 2 and the
-public data view suggests wide site adoption across the world in particular by
-larger programs. One such example is the Australian Center of Field Robotics
-which rely on Autonomous Underwater Vehicles to collect large amounts of survey
-data.
-- [Reefcloud](https://reefcloud.ai/): open access platform developed by the
-Australian Institute of Marine Science and is supported by the Australian
-government.
-- [CoralNet](https://coralnet.com)

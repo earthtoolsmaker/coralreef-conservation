@@ -125,29 +125,59 @@ finetune_xlarge:
 finetune_all: finetune_baseline finetune_regions finetune_xlarge finetune_large finetune_medium finetune_small finetune_nano
 
 evaluate_all_on_their_own_validation_set:
-	python src/evaluate/yolov8/cli.py \
-	  --to data/08_reporting/yolov8/evaluation/ \
-	  --model-root-path data/06_models/yolov8/segment/ \
-	  --n-qualitative-samples 15 \
-	  --batch-size 16 \
-	  --num-workers 64 \
-	  --random-seed 42 \
-	  --loglevel info
+	python src/evaluate/yolov8/cli2.py \
+	--to data/08_reporting/yolov8/evaluation/ \
+	--model-root-path data/06_models/yolov8/segment/ \
+	--batch-size 16 \
+	--save-predictions-path data/07_model_output/yolov8/evaluation/ \
+	--data-split test \
+	--random-seed 0 \
+	--n-samples 10 \
+	--loglevel info
 
-evaluate_all_on_common_validation_set:
-	python src/evaluate/yolov8/cli.py \
-	  --to data/08_reporting/yolov8/evaluation/ \
-	  --model-root-path data/06_models/yolov8/segment/ \
-	  --data-root-path data/05_model_input/yolov8/v2/SEAFLOWER_BOLIVAR_and_SEAFLOWER_COURTOWN_and_SEAVIEW_ATL_and_SEAVIEW_IDN_PHL_and_SEAVIEW_PAC_AUS_and_TETES_PROVIDENCIA/ \
-	  --n-qualitative-samples 15 \
-	  --batch-size 16 \
-	  --num-workers 64 \
-	  --random-seed 42 \
-	  --loglevel info
+evaluate_all_on_common_set:
+	python src/evaluate/yolov8/cli2.py \
+	--to data/08_reporting/yolov8/evaluation/ \
+	--model-root-path data/06_models/yolov8/segment/ \
+	--batch-size 16 \
+	--data-root-path data/05_model_input/yolov8/v2/SEAFLOWER_BOLIVAR_and_SEAFLOWER_COURTOWN_and_SEAVIEW_ATL_and_SEAVIEW_IDN_PHL_and_SEAVIEW_PAC_AUS_and_TETES_PROVIDENCIA/  \
+	--save-predictions-path data/07_model_output/yolov8/evaluation/ \
+	--data-split test \
+	--random-seed 0 \
+	--n-samples 10 \
+	--loglevel info
 
-evaluate_all: evaluate_all_on_their_own_validation_set evaluate_all_on_common_validation_set
+evaluate_best_large_on_all_datasets:
+	python src/evaluate/yolov8/cli2.py \
+	--to data/08_reporting/yolov8/evaluation/ \
+	--model-root-path data/06_models/yolov8/segment/current_best_large \
+	--batch-size 16 \
+	--data-root-path data/05_model_input/yolov8/v2/  \
+	--save-predictions-path data/07_model_output/yolov8/evaluation/ \
+	--data-split test \
+	--random-seed 0 \
+	--n-samples 10 \
+	--loglevel info
+
+evaluate_region_seaview_atl_on_all_datasets:
+	python src/evaluate/yolov8/cli2.py \
+	--to data/08_reporting/yolov8/evaluation/ \
+	--model-root-path data/06_models/yolov8/segment/current_best_xlarge_region_seaview_atl \
+	--batch-size 16 \
+	--data-root-path data/05_model_input/yolov8/v2/  \
+	--save-predictions-path data/07_model_output/yolov8/evaluation/ \
+	--data-split test \
+	--random-seed 0 \
+	--n-samples 10 \
+	--loglevel info
+
+evaluate_all: evaluate_all_on_their_own_validation_set evaluate_all_on_common_set
 
 hyperparameters_search:
 	python src/train/yolov8/hyperparameters_search.py
+
+build_report:
+	cd reports/yolov8/ ; pandoc report.md -V geometry:margin=0.8in --toc -o report.pdf 
+
 
 all: setup data finetune_all evaluate_all
