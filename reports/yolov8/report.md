@@ -1,5 +1,5 @@
 ---
-title: "[DRAFT] Benthic Coverage - Coral segmentation"
+title: "Benthic Coverage - Coral segmentation"
 author: "Arthur Caillau arthur@caillau.me"
 date: 2024-01-30
 abstract: |
