@@ -1,16 +1,29 @@
-# Coral Reef #2
+# AI for coral reefs
 
-This folder contains data and work done during the Coral Reef #2
-challenge organized by Fruitpunchai.
+![Underwater imagery analyser](./docs/pipeline_overview.png)
 
-The project is organized following the [cookie-cutter-datascience
-guideline](https://drivendata.github.io/cookiecutter-data-science/#directory-structure).
+## Context
 
-## TODO
+Marine biologists engaged in the study of coral reefs invest a significant
+portion of their time in manually processing data obtained from research dives.
+The objective of this collaboration is to create an image segmentation pipeline
+that accelerates the analysis of such data. This endeavor aims to assist
+conservationists and researchers in enhancing their efforts to protect and
+comprehend these vital ocean ecosystems. Leveraging computer vision for the
+segmentation of coral reefs in benthic imagery holds the potential to quantify
+the long-term growth or decline of coral cover within marine protected areas.
 
-- [ ] add the label_mismatch logic in a script to be able to regenerate it at will
-- [ ] Try running the repo from scratch on the GPU instance
-- [ ] Finish the pyproject.toml
+Monitoring coral reefs is fundamental for efficient management, with swift
+reporting being critical for timely guidance. Although underwater photography
+has significantly enhanced the precision and pace of data gathering, the
+bottleneck in reporting results persists due to image processing.
+
+![AI Analysis](./docs/coral_ai.gif)
+
+> Our tools tap on AI and computer vision for increasing the capabilities of
+> coral reef and marine monitoring in examining benthic/seabed features.
+>
+> <cite>– ReefSupport</cite>
 
 ## Fast Track
 
@@ -238,9 +251,3 @@ _Note_: Make sure to use the right model-weights path.
 YOLOv8 offers a wide variety of source types. The documentation is
 available on their [website
 here](https://docs.ultralytics.com/modes/predict/#inference-sources).
-
-## Tools
-
-- [Drive](https://drive.google.com/drive/folders/10nyCTXklFmpKC-y4ph3GAnUK-sDu9y6l)
-- [Notion](https://www.notion.so/fruitpunch/AI-for-Coral-Reefs-43061618a26a4ca6b610f00d7d0daac9)
-- [Slack](fruitpunchai.slack.com)
