@@ -25,6 +25,39 @@ bottleneck in reporting results persists due to image processing.
 >
 > <cite>– ReefSupport</cite>
 
+## Setup
+
+### git-lfs
+
+Make sure [`git-lfs`](https://git-lfs.com/) is installed on your system.
+
+Run the following command to check:
+
+```sh
+git lfs install
+```
+
+If not installed, one can install it with the following:
+
+#### Linux
+
+```sh
+sudo apt install git-lfs
+git-lfs install
+```
+
+#### Mac
+
+```sh
+brew install git-lfs
+git-lfs install
+```
+
+#### Windows
+
+Download and run the latest [windows installer](https://github.com/git-lfs/git-lfs/releases).
+
+
 ## Fast Track
 
 Create a `virtualenv`, activate it and run the following command that
