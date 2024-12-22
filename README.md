@@ -1,5 +1,8 @@
 # AI for coral reefs
 
+Segmentation of coral reefs in benthic imagery to quantify the long-term growth
+or decline of coral cover within marine protected areas.
+
 [<img src="./docs/ml_space.png" />](https://www.earthtoolsmaker.org/spaces/coral_reef_health_monitoring/)
 
 ## Context
