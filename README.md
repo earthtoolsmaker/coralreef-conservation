@@ -1,6 +1,6 @@
 # AI for coral reefs
 
-![Underwater imagery analyser](./docs/pipeline_overview.png)
+[<img src="./docs/ml_space.png" />](https://www.earthtoolsmaker.org/spaces/coral_reef_health_monitoring/)
 
 ## Context
 
@@ -12,6 +12,8 @@ conservationists and researchers in enhancing their efforts to protect and
 comprehend these vital ocean ecosystems. Leveraging computer vision for the
 segmentation of coral reefs in benthic imagery holds the potential to quantify
 the long-term growth or decline of coral cover within marine protected areas.
+
+![Underwater imagery analyser](./docs/pipeline_overview.png)
 
 Monitoring coral reefs is fundamental for efficient management, with swift
 reporting being critical for timely guidance. Although underwater photography
