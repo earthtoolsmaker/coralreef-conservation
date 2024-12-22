@@ -1,4 +1,4 @@
-# AI for coral reefs
+# AI for coral reefs 🪸
 
 Segmentation of coral reefs in benthic imagery to quantify the long-term growth
 or decline of coral cover within marine protected areas.
